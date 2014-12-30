@@ -14,7 +14,8 @@
   (find-if (lambda (f) (find-font (font-spec :name f) frame)) fonts))
 
 (defvar personal-font-preferences
-  '("PragmataPro"
+  '("Fantasque Sans Mono"
+    "PragmataPro"
     "Inconsolata"
     "DejaVu Sans Mono"
     "Bitstream Vera Sans Mono"
