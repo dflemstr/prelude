@@ -28,7 +28,9 @@
   (let ((preferred-font
          (personal-font-candidate personal-font-preferences frame)))
     (if preferred-font
-        (set-frame-font preferred-font nil (if frame (list frame))))))
+        (progn
+          (message "Using font %s" preferred-font)
+          (set-frame-font preferred-font nil (if frame (list frame)))))))
 
 (add-hook 'after-make-frame-functions 'personal-font-set-preferred)
 
