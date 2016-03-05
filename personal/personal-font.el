@@ -23,16 +23,21 @@
     "Menlo"
     "Consolas"))
 
-(defun personal-font-set-preferred (&optional frame)
+(defun personal-font-set-preferred (&rest frame)
   "Set the default font in FRAME to the preferred font."
-  (let ((preferred-font
-         (personal-font-candidate personal-font-preferences frame)))
-    (if preferred-font
-        (progn
-          (message "Using font %s" preferred-font)
-          (set-frame-font preferred-font nil (if frame (list frame)))))))
+  (if window-system
+      (let* ((f (if (car frame)
+                   (car frame)
+                 (selected-frame)))
+             (preferred-font
+              (personal-font-candidate personal-font-preferences f)))
+        (if preferred-font
+            (progn
+              (message "Using font %s" preferred-font)
+              (set-frame-font preferred-font nil (if f (list f))))))))
 
-(add-hook 'after-make-frame-functions 'personal-font-set-preferred)
+(add-hook 'after-make-frame-functions #'personal-font-set-preferred t)
+(personal-font-set-preferred)
 
 (provide 'personal-font)
 ;;; personal-font.el ends here
