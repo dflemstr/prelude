@@ -5,16 +5,14 @@
 ;;; Code:
 
 (require 'prelude-programming)
-(prelude-require-packages '(flycheck-rust racer))
+(prelude-require-packages '(cargo flycheck-rust racer))
 
-(eval-after-load 'rust-mode
-  '(add-hook 'rust-mode-hook #'racer-mode))
+(setq racer-cmd "~/.cargo/bin/racer")
+(setq racer-rust-src-path "~/github.com/rust-lang/rust/src")
 
-(eval-after-load 'racer-mode
-  '(add-hook 'racer-mode-hook #'company-mode))
-
-(eval-after-load 'flycheck
-  '(add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
+(add-hook 'rust-mode-hook #'racer-mode)
+(add-hook 'racer-mode-hook #'company-mode)
+(add-hook 'flycheck-mode-hook #'flycheck-rust-setup)
 
 (provide 'personal-rust)
 ;;; personal-rust.el ends here
