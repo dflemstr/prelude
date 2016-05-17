@@ -44,5 +44,18 @@
 ;; Many styles set ugly backgrounds for 'whitespace-space
 (set-face-background 'whitespace-space nil)
 
+;; This make it so that whitespace-line-column can be customized as a
+;; local variable
+(add-hook
+ 'hack-local-variables-hook
+ (lambda ()
+   (if (or whitespace-mode global-whitespace-mode)
+       (progn
+         (whitespace-mode 0)
+         (whitespace-mode 1)))))
+
+(setq whitespace-line-column nil)
+(put 'whitespace-line-column 'safe-local-variable #'integerp)
+
 (provide 'personal-whitespace)
 ;;; personal-whitespace.el ends here
