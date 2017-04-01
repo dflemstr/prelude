@@ -35,7 +35,7 @@
         (if preferred-font
             (progn
               (message "Using font %s" preferred-font)
-              (set-frame-font preferred-font nil (if f (list f))))))))
+              (set-frame-font preferred-font t t))))))
 
 (add-hook 'after-make-frame-functions #'personal-font-set-preferred t)
 (personal-font-set-preferred)
